@@ -41,6 +41,11 @@ public class KafkaController {
 	@Value("${kafka.group}")
 	private String group;
 
+	/**
+	 * API to send message in kafka queue default topic.
+	 * @param msg
+	 * @return
+	 */
 	@RequestMapping(path = "/send", method = RequestMethod.GET)
 	public ResponseEntity<Object> sendMsg(String msg) {
 		String res = null;
