@@ -15,6 +15,8 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
+import com.synectiks.kafka.helpers.Listener;
+
 /**
  * @author Rajesh
  */
@@ -25,7 +27,7 @@ public class KafkaProducerConfig {
 	private String bootstrap;
 
 	@Bean
-	public ProducerFactory<String, String> producerFactory() {
+	public ProducerFactory<Object, Object> producerFactory() {
 		Map<String, Object> configProps = new HashMap<>();
 		configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrap);
 		configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
@@ -36,7 +38,9 @@ public class KafkaProducerConfig {
 	}
 
 	@Bean
-	public KafkaTemplate<String, String> kafkaTemplate() {
-		return new KafkaTemplate<>(producerFactory());
+	public KafkaTemplate<Object, Object> kafkaTemplate() {
+		KafkaTemplate<Object, Object> template = new KafkaTemplate<>(producerFactory());
+		template.setProducerListener(new Listener());
+		return template;
 	}
 }

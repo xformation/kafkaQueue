@@ -34,6 +34,6 @@ public class KafkaTopicConfig {
 
 	@Bean
 	public NewTopic backupTopic() {
-		return new NewTopic(topic,  1, (short)1);
+		return new NewTopic(topic, 1, (short) 1);
 	}
 }
