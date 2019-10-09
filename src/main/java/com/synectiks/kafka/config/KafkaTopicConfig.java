@@ -36,4 +36,9 @@ public class KafkaTopicConfig {
 	public NewTopic backupTopic() {
 		return new NewTopic(topic, 1, (short) 1);
 	}
+
+	@Bean
+	public NewTopic cmsTopic() {
+		return new NewTopic("cms", 1, (short) 1);
+	}
 }
