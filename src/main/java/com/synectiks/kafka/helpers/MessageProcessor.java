@@ -74,7 +74,7 @@ public class MessageProcessor {
 	 *     		"logoFileName":"abc.jpg",
 	 *      	"backgroundImageFileName":"def.jpg"
 	 * 		},
-	 * 	"cls": "com.synectiks.cms.domain.College"}
+	 * 	"cls": "com.synectiks.cms.entities.College"}
 	 * @param url
 	 * @return
 	 */
