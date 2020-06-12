@@ -1,0 +1,1 @@
+java -jar target/kafkaQueue-3.0.0-SNAPSHOT-exec.jar --SERVER_PORT=8190
