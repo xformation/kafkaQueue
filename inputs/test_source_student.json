@@ -1,0 +1,22 @@
+[
+	'{{repeat(200)}}',
+	{
+		"studentId": "{{integer(1,1000)}}",
+		"name": "{{firstName()}}",
+		"address": "{{state()}}",
+		"branch": "{{random("Hye Eng College","Del Eng College")}}",
+		"department": "{{random("Computer Science","Civil Engineering", "Chemical Engineering")}}",
+		"cellPhoneNo": "{{phone()}}",
+		"section": "{{random("A","B", "C", "D")}}",
+		"gender": "{{random("Male","Female")}}",
+		"batch": "{{random("FirstYear", "SecondYear", "ThirdYear", "FourthYear", "FifthYear")}}",
+		"emailId": "{{firstName()}}@aa.com",
+		"totalFee": "{{integer(1,10000)}}",
+		"depositedFee": "{{integer(1,1000)}}",
+		"remainingFee": "{{integer(1,1000)}}",
+		"academicYear": "2020-2021"	
+        
+	}
+	
+]
+
