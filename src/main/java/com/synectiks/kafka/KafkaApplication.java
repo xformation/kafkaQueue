@@ -111,7 +111,7 @@ public class KafkaApplication {
 
     }
 	
-	private static String generateRandomData(File sourceFile, File tempDestinationFile)
+	public  static String generateRandomData(File sourceFile, File tempDestinationFile)
 			throws JsonDataGeneratorException, IOException, FileNotFoundException {
 		tempDestinationFile.deleteOnExit();
 		String jsonString = "";
@@ -126,7 +126,7 @@ public class KafkaApplication {
 		return jsonString;
 	}
 	
-	private static void fireEvent(String jsonStr, String kafkaTopic) {
+	public static void fireEvent(String jsonStr, String kafkaTopic) {
 		RestTemplate restTemplate = new RestTemplate();
 //    	ApplicationProperties applicationProperties = JsontokafkaApp.getBean(ApplicationProperties.class);
 		String res = null;
