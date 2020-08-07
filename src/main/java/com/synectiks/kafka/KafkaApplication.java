@@ -126,6 +126,14 @@ public class KafkaApplication {
 		return jsonString;
 	}
 	
+	public  static String generateRandomData(String sourceJson, OutputStream outputStream)
+			throws JsonDataGeneratorException, IOException, FileNotFoundException {
+		JsonDataGenerator jsonDataGenerator = new JsonDataGeneratorImpl();
+	    String jsonString = jsonDataGenerator.generateTestDataJson(sourceJson, outputStream);
+	    System.out.println(jsonString);
+		return jsonString;
+	}
+	
 	public static void fireEvent(String jsonStr, String kafkaTopic) {
 		RestTemplate restTemplate = new RestTemplate();
 //    	ApplicationProperties applicationProperties = JsontokafkaApp.getBean(ApplicationProperties.class);

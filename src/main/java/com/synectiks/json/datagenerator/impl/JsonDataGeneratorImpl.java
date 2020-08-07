@@ -45,11 +45,11 @@ public class JsonDataGeneratorImpl implements JsonDataGenerator {
      * {@inheritDoc}
      */
     @Override
-    public void generateTestDataJson(final String text, final OutputStream outputStream)
+    public String generateTestDataJson(final String text, final OutputStream outputStream)
         throws JsonDataGeneratorException {
         try (ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
             text.getBytes(Charsets.UTF_8))) {
-            generateTestDataJson(byteArrayInputStream, outputStream);
+            return generateTestDataJson(byteArrayInputStream, outputStream);
         } catch (JsonDataGeneratorException | IOException e) {
             throw new JsonDataGeneratorException(e);
         }

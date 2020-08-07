@@ -19,7 +19,7 @@ public interface JsonDataGenerator {
      *                     You are responsible for closing your own OutputStream.
      * @throws JsonDataGeneratorException default exception thrown when using the data generator
      */
-    void generateTestDataJson(String text, OutputStream outputStream)
+    String generateTestDataJson(String text, OutputStream outputStream)
         throws JsonDataGeneratorException;
 
     /**
