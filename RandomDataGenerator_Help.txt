@@ -1,0 +1,76 @@
+How to run Random data generator
+
+Required Items : 
+	1. kafkaQueue (This serves two purposes. As a spring boot application, it pushes data into kafka. As stand-alone application, it generates random data)
+	2. kafka
+	3. influx db
+	4. nifi: (nifi flow reads kafka topic and push data into influx db)
+	
+Source file (source schema JSON to generate JSON data. Data will contains same fields given in this source file with different random values)
+	Example source schema given as below. Save this source json in some file (e.g. test.json) 
+	
+	[
+		'{{repeat(200)}}',
+		{
+			"studentId": "{{integer(1,1000)}}",
+			"name": "{{firstName()}}",
+			"address": "{{state()}}",
+			"branch": "{{random("Hye Eng College","Del Eng College")}}",
+			"department": "{{random("Computer Science","Civil Engineering", "Chemical Engineering")}}",
+			"cellPhoneNo": "{{phone()}}",
+			"section": "{{random("A","B", "C", "D")}}",
+			"gender": "{{random("Male","Female")}}",
+			"batch": "{{random("FirstYear", "SecondYear", "ThirdYear", "FourthYear", "FifthYear")}}",
+			"emailId": "{{firstName()}}@aa.com",
+			"totalFee": "{{integer(1,10000)}}",
+			"depositedFee": "{{integer(1,1000)}}",
+			"remainingFee": "{{integer(1,1000)}}",
+			"academicYear": "2020-2021"				
+		}	
+	]
+	
+
+Preconditions: Following processes needs to be run before executing command to generate random data:
+
+	1. Start zookeeper
+		cd <kafka dirctory>\bin\windows  (e.g. C:\kafka\kafka_2.12-2.3.0\bin\windows)
+		zookeeper-server-start.bat ..\..\config\zookeeper.properties
+		
+	2. Start kafka server-start
+		cd <kafka dirctory>\bin\windows  (e.g. C:\kafka\kafka_2.12-2.3.0\bin\windows)
+		kafka-server-start.bat ..\..\config\server.properties
+	
+	3. Start kafkaQueue as spring boot application
+		cd <kafkaQueue directory> (e.g. C:\mycode\kafkaQueue)
+		java -jar target/kafkaQueue-3.0.0-SNAPSHOT-exec.jar --SERVER_PORT=8190
+		or use run.bat to start kafkaQueue
+		
+	4. Start nifi
+		cd <nifi directory>\bin (e.g. C:\nifi\bin)
+		run-nifi.bat (use this bat file to start nifi on windows or nifi.sh on linux)
+		
+	5. Start influx db
+		cd <influx directory> (e.g. C:\influxdb\influxdb-1.0.0-1)
+		influxd.exe
+		
+Generate Random data
+	
+	1.	Execute following commands
+	
+		cd <kafkaQueue directory>\target (e.g. C:\mycode\kafkaQueue\target) 
+		
+		java -jar target\kafkaQueue-3.0.0-SNAPSHOT-exec.jar -s <source_json_absolute_path>\test.json -kafkaTopic <topic_name>
+		
+		e.g. 
+		java -jar target\kafkaQueue-3.0.0-SNAPSHOT-exec.jar -s C:\mycode\data_generatorsrc_json\test.json 
+		
+		
+
+NOTE: 	Before doing compile/build of kafkaQueue, Please check the kafka URL in KafkaApplication.java file. 
+		
+		public static String KAFKA_URL = "http://localhost:8190/kafka/send";
+		
+		Above url (refered by KAFKA_URL static variable) is being used by random data generator code
+		
+GIT URL:
+		kafkaQueue: https://github.com/xformation/kafkaQueue.git
